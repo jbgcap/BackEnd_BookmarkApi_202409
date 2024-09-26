@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  bookmark-db:
+    image: postgres:latest
+    container_name: bookmark-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bookmarkdb
+    ports:
+      - "15432:5432"
+
+  bookmark-api:
+    image: jbgcap/springbootnextjs:0.1
+    container_name: bookmark-api
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - bookmark-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://bookmark-db:5432/bookmarkdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
