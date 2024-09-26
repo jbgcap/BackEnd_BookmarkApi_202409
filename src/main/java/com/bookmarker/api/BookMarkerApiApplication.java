@@ -21,7 +21,7 @@ public class BookMarkerApiApplication {
 	@Bean
 	public FilterRegistrationBean<?> corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(List.of("*"));
+		configuration.setAllowedOriginPatterns(List.of("*"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of(
 				"Access-Control-Allow-Headers",
